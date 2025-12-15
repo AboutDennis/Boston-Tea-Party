@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Der Funke der Revolution: Die Boston Tea Party</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS VARIABLEN & GRUNDLAGEN --- */
+        :root {
+            --bg-color: #FDFBF7; /* Pergament-Ton */
+            --text-color: #2C3E50;
+            --primary-blue: #1A252F; /* Nacht/Hafen Blau */
+            --accent-red: #C0392B; /* Revolutions-Rot */
+            --gold: #D4AF37;
+            --spacing-unit: 2rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cinzel', serif; /* Historischer Look */
+            color: var(--primary-blue);
+            line-height: 1.3;
+        }
+
+        /* --- FORTSCHRITTSBALKEN --- */
+        #progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: transparent;
+            z-index: 1000;
+        }
+        #progress-bar {
+            height: 100%;
+            background: var(--accent-red);
+            width: 0%;
+        }
+
+        /* --- HEADER / HERO SECTION --- */
+        header {
+            height: 90vh;
+            background: linear-gradient(rgba(26, 37, 47, 0.8), rgba(26, 37, 47, 0.6)), url('https://images.unsplash.com/photo-1546522744-b81682393278?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); /* Symbolbild Hafen/Schiff */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            padding: 2rem;
+        }
+
+        header h1 {
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color: #fff;
+            border-bottom: 3px solid var(--accent-red);
+            padding-bottom: 0.5rem;
+        }
+
+        header p.subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--primary-blue);
+            padding: 1rem;
+            text-align: center;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section {
+            margin-bottom: 6rem;
+            opacity: 0; /* Für Fade-in Animation */
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-number {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            color: var(--accent-red);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        /* --- HIGHLIGHT BOXES & CARDS --- */
+        .highlight-box {
+            background: #fff;
+            border-left: 5px solid var(--gold);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 0 8px 8px 0;
+        }
+
+        blockquote {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--primary-blue);
+            text-align: center;
+            margin: 3rem 0;
+            position: relative;
+        }
+        blockquote::before {
+            content: "“";
+            font-size: 5rem;
+            color: var(--accent-red);
+            opacity: 0.2;
+            position: absolute;
+            top: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* --- GRID FÜR GESETZE --- */
+        .acts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .act-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-top: 4px solid var(--primary-blue);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .act-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .act-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .act-card.intolerable {
+            border-color: var(--accent-red);
+            background-color: #fff5f5;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--primary-blue);
+            color: #fff;
+            text-align: center;
+            padding: 3rem 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            nav { display: none; /* Vereinfachung für Mobile */ }
+            .container { padding: 2rem 1.5rem; }
+            h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <header>
+        <p class="subtitle">16. Dezember 1773</p>
+        <h1>Der Funke der Revolution</h1>
+        <p class="subtitle">Eine Analyse der Boston Tea Party</p>
+    </header>
+
+    <nav>
+        <a href="#intro">Einleitung</a>
+        <a href="#history">Vorgeschichte</a>
+        <a href="#trigger">Auslöser</a>
+        <a href="#night">Die Nacht</a>
+        <a href="#reaction">Reaktion</a>
+        <a href="#conclusion">Fazit</a>
+    </nav>
+
+    <div class="container">
+        
+        <section id="intro">
+            <span class="section-number">Kapitel 1</span>
+            <h2>Einleitung</h2>
+            <p>Am kalten Abend des 16. Dezember 1773 ereignete sich im Hafen von Boston ein Vorfall, der die Weltgeschichte nachhaltig verändern sollte. Was vordergründig wie ein Akt des Vandalismus aussah – die Vernichtung von Handelseigentum –, war in Wahrheit eine politisch hochbrisante Inszenierung.</p>
+            <div class="highlight-box">
+                <strong>Kernaspekt:</strong> Die Boston Tea Party war kein spontaner Aufstand betrunkener Randalierer, sondern ein kalkulierter Akt des zivilen Ungehorsams gegen die britische Krone.
+            </div>
+            <p>Sie markiert den psychologischen Wendepunkt, an dem der Konflikt zwischen den 13 Kolonien und dem Mutterland Großbritannien unumkehrbar wurde und schließlich in den Amerikanischen Unabhängigkeitskrieg mündete. Dieser Aufsatz beleuchtet die ökonomischen Ursachen, den dramatischen Ablauf der Nacht und die weitreichenden Konsequenzen dieses historischen Ereignisses.</p>
+        </section>
+
+        <hr style="border: 0; border-top: 1px solid #ddd; margin: 2rem 0;">
+
+        <section id="history">
+            <span class="section-number">Kapitel 2</span>
+            <h2>Die Vorgeschichte: Schulden, Steuern und Prinzipien</h2>
+            <p>Um die Boston Tea Party zu verstehen, muss man den Blick auf das Ende des Siebenjährigen Krieges (1756–1763) richten. Großbritannien ging als Sieger hervor, doch der Preis war hoch: Die Staatskasse war leer.</p>
+            
+            <h3>Das Ende des "Salutary Neglect"</h3>
+            <p>Jahrzehntelang hatte London die Kolonien weitgehend sich selbst überlassen. Doch nun entschied das Parlament in Westminster, dass die Kolonisten ihren "fairen Anteil" an den Kosten für die Verteidigung und Verwaltung des Empire tragen sollten.</p>
+
+            <h3>Die Eskalationsspirale</h3>
+            <div class="acts-grid">
+                <div class="act-card">
+                    <h4>Sugar Act (1764) & Stamp Act (1765)</h4>
+                    <p>Direkte Steuern auf Zucker und Druckerzeugnisse, die erstmals breiten Widerstand auslösten.</p>
+                </div>
+                <div class="act-card">
+                    <h4>Townshend Acts (1767)</h4>
+                    <p>Zölle auf Importwaren wie Glas, Blei, Farben, Papier und – entscheidend – Tee.</p>
+                </div>
+            </div>
+
+            <p>Die Kolonisten argumentierten nicht unbedingt gegen die Höhe der Steuern, sondern gegen das Prinzip. Ihr Slogan lautete: <strong>"No Taxation without Representation"</strong>. Nach massiven Protesten nahm Großbritannien 1770 die meisten Zölle zurück – bis auf einen: die Teesteuer.</p>
+        </section>
+
+        <section id="trigger">
+            <span class="section-number">Kapitel 3</span>
+            <h2>Der Auslöser: Der Tea Act von 1773</h2>
+            <p>Im Jahr 1773 stand die britische East India Company (EIC) vor dem Bankrott. Um sie zu retten, verabschiedete das Parlament den Tea Act.</p>
+            <p>Ironischerweise machte der Tea Act den Tee für die Kolonisten <em>billiger</em>. Das Gesetz erlaubte der EIC, Zwischenhändler zu umgehen. Doch Lord North unterschätzte die Amerikaner. Die <strong>Sons of Liberty</strong> sahen darin zwei Gefahren:</p>
+            <ul>
+                <li>Die Akzeptanz des billigen Tees würde bedeuten, dass man die britische Steuer stillschweigend anerkannte.</li>
+                <li>Das Monopol der East India Company bedrohte die lokalen amerikanischen Kaufleute.</li>
+            </ul>
+        </section>
+
+        <section id="night">
+            <span class="section-number">Kapitel 4</span>
+            <h2>Die Nacht des 16. Dezember 1773</h2>
+            <p>Die Schiffe <em>Dartmouth</em>, <em>Eleanor</em> und <em>Beaver</em> lagen im Hafen, beladen mit Tee. Die Stimmung war explosiv. Die Frist zum Entladen lief ab.</p>
+            
+            <blockquote>
+                "Der Hafen von Boston wird heute Nacht zur Teekanne."
+            </blockquote>
+
+            <p>Am Abend versammelten sich Tausende im Old South Meeting House. Als klar wurde, dass der Gouverneur nicht nachgeben würde, gab Samuel Adams das Signal. Eine Gruppe von etwa 60 bis 130 Männern, viele als Mohawk-Krieger verkleidet, marschierte zum Griffin's Wharf.</p>
+            
+            <div class="highlight-box" style="background-color: var(--primary-blue); color: white; border-left-color: var(--accent-red);">
+                <strong>Die Bilanz:</strong> Innerhalb von drei Stunden wurden 342 Kisten zerschlagen und ca. 45 Tonnen Tee ins Wasser geworfen. Wert: ca. 10.000 Pfund Sterling (heute über 1 Million Dollar).
+            </div>
+            <p>Es gab keine Gewalt gegen die Besatzung. Das einzige beschädigte "Nicht-Tee-Objekt" war angeblich ein Vorhängeschloss, das am nächsten Tag ersetzt wurde.</p>
+        </section>
+
+        <section id="reaction">
+            <span class="section-number">Kapitel 5</span>
+            <h2>Die Reaktion: Von Zwang zu Krieg</h2>
+            <p>Für König Georg III. war dies offene Rebellion. Das Parlament antwortete mit Härte und verabschiedete die <strong>Coercive Acts</strong> (in Amerika "Intolerable Acts" genannt):</p>
+
+            <div class="acts-grid">
+                <div class="act-card intolerable">
+                    <h4>Boston Port Act</h4>
+                    <p>Der Hafen wurde geschlossen, bis der Tee bezahlt war. Dies ruinierte die Wirtschaft der Stadt.</p>
+                </div>
+                <div class="act-card intolerable">
+                    <h4>Massachusetts Government Act</h4>
+                    <p>Die Selbstverwaltung der Kolonie wurde fast vollständig aufgehoben.</p>
+                </div>
+                <div class="act-card intolerable">
+                    <h4>Administration of Justice Act</h4>
+                    <p>Britische Beamte konnten nun in England vor Gericht gestellt werden (und wurden oft freigesprochen).</p>
+                </div>
+                <div class="act-card intolerable">
+                    <h4>Quartering Act</h4>
+                    <p>Die Einquartierung britischer Soldaten in Privathäusern wurde erleichtert.</p>
+                </div>
+            </div>
+            
+            <p>Großbritannien hoffte, Boston zu isolieren. Das Gegenteil trat ein. Die Kolonien solidarisierten sich, was zum Ersten Kontinentalkongress führte. Nur 16 Monate später fielen die ersten Schüsse des Krieges.</p>
+        </section>
+
+        <section id="conclusion">
+            <span class="section-number">Kapitel 6</span>
+            <h2>Fazit und historische Einordnung</h2>
+            <p>Die Boston Tea Party ist weit mehr als eine Anekdote. Sie demonstriert die Macht symbolischer Politik. Die Kolonisten opferten wirtschaftliche Vorteile für politische Prinzipien.</p>
+            <p>Es war der "Point of no Return". Heute gilt das Ereignis als Urtypus des zivilen Ungehorsams in den USA und erinnert daran, dass Revolutionen oft nicht durch große Schlachten, sondern durch symbolische Handlungen ausgelöst werden, die das kollektive Bewusstsein verändern.</p>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Geschichte Digital. Ein Projekt über die Wurzeln der Unabhängigkeit.</p>
+    </footer>
+
+    <script>
+        // Scroll Progress Bar Logic
+        window.onscroll = function() {myFunction()};
+
+        function myFunction() {
+          var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+          var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          var scrolled = (winScroll / height) * 100;
+          document.getElementById("progress-bar").style.width = scrolled + "%";
+        }
+
+        // Fade-In Animation Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Nur einmal animieren
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
