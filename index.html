@@ -59,7 +59,8 @@
         /* --- HEADER / HERO SECTION --- */
         header {
             height: 90vh;
-            background: linear-gradient(rgba(26, 37, 47, 0.8), rgba(26, 37, 47, 0.6)), url('https://images.unsplash.com/photo-1546522744-b81682393278?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); /* Symbolbild Hafen/Schiff */
+            /* UPDATED: Historische Darstellung von N. Currier, 1846 */
+            background: linear-gradient(rgba(26, 37, 47, 0.7), rgba(26, 37, 47, 0.5)), url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Boston_Tea_Party_Currier_colored.jpg/1280px-Boston_Tea_Party_Currier_colored.jpg'); 
             background-size: cover;
             background-position: center;
             display: flex;
@@ -74,7 +75,7 @@
         header h1 {
             font-size: clamp(2.5rem, 5vw, 5rem);
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
             color: #fff;
             border-bottom: 3px solid var(--accent-red);
             padding-bottom: 0.5rem;
@@ -85,7 +86,8 @@
             font-size: 1.2rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            opacity: 0.9;
+            opacity: 0.95;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
 
         /* --- NAVIGATION --- */
@@ -153,6 +155,34 @@
             text-align: justify;
         }
 
+        /* --- NEW: BILDER STYLES --- */
+        figure {
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* Moderner Schatten */
+        }
+
+        figcaption {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        /* Stil für rechtsbündiges Bild im Textfluss */
+        .img-float-right {
+            float: right;
+            width: 40%;
+            margin: 0.5rem 0 1.5rem 2rem;
+        }
+
         /* --- HIGHLIGHT BOXES & CARDS --- */
         .highlight-box {
             background: #fff;
@@ -170,6 +200,7 @@
             text-align: center;
             margin: 3rem 0;
             position: relative;
+            padding: 0 2rem;
         }
         blockquote::before {
             content: "“";
@@ -228,6 +259,11 @@
             nav { display: none; /* Vereinfachung für Mobile */ }
             .container { padding: 2rem 1.5rem; }
             h2 { font-size: 2rem; }
+            .img-float-right {
+                float: none;
+                width: 100%;
+                margin: 2rem 0;
+            }
         }
     </style>
 </head>
@@ -269,12 +305,18 @@
         <section id="history">
             <span class="section-number">Kapitel 2</span>
             <h2>Die Vorgeschichte: Schulden, Steuern und Prinzipien</h2>
+            
+            <figure class="img-float-right">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/King_George_III_by_Allan_Ramsay_1762.jpg/600px-King_George_III_by_Allan_Ramsay_1762.jpg" alt="Porträt von König Georg III.">
+                <figcaption>König Georg III. bestand auf dem Recht des Parlaments, die Kolonien zu besteuern.</figcaption>
+            </figure>
+
             <p>Um die Boston Tea Party zu verstehen, muss man den Blick auf das Ende des Siebenjährigen Krieges (1756–1763) richten. Großbritannien ging als Sieger hervor, doch der Preis war hoch: Die Staatskasse war leer.</p>
             
             <h3>Das Ende des "Salutary Neglect"</h3>
             <p>Jahrzehntelang hatte London die Kolonien weitgehend sich selbst überlassen. Doch nun entschied das Parlament in Westminster, dass die Kolonisten ihren "fairen Anteil" an den Kosten für die Verteidigung und Verwaltung des Empire tragen sollten.</p>
 
-            <h3>Die Eskalationsspirale</h3>
+            <div style="clear: both;"></div> <h3>Die Eskalationsspirale</h3>
             <div class="acts-grid">
                 <div class="act-card">
                     <h4>Sugar Act (1764) & Stamp Act (1765)</h4>
@@ -309,6 +351,11 @@
                 "Der Hafen von Boston wird heute Nacht zur Teekanne."
             </blockquote>
 
+            <figure>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Boston_Tea_Party_w.jpg/1024px-Boston_Tea_Party_w.jpg" alt="Historischer Stich der Boston Tea Party">
+                <figcaption>Eine der frühesten Darstellungen der Tea Party (Stich von W.D. Cooper, 1789). Man beachte die symbolische Verkleidung.</figcaption>
+            </figure>
+
             <p>Am Abend versammelten sich Tausende im Old South Meeting House. Als klar wurde, dass der Gouverneur nicht nachgeben würde, gab Samuel Adams das Signal. Eine Gruppe von etwa 60 bis 130 Männern, viele als Mohawk-Krieger verkleidet, marschierte zum Griffin's Wharf.</p>
             
             <div class="highlight-box" style="background-color: var(--primary-blue); color: white; border-left-color: var(--accent-red);">
@@ -333,7 +380,7 @@
                 </div>
                 <div class="act-card intolerable">
                     <h4>Administration of Justice Act</h4>
-                    <p>Britische Beamte konnten nun in England vor Gericht gestellt werden (und wurden oft freigesprochen).</p>
+                    <p>Britische Beamte konnten nun in England vor Gericht gestellt werden.</p>
                 </div>
                 <div class="act-card intolerable">
                     <h4>Quartering Act</h4>
@@ -341,7 +388,14 @@
                 </div>
             </div>
             
-            <p>Großbritannien hoffte, Boston zu isolieren. Das Gegenteil trat ein. Die Kolonien solidarisierten sich, was zum Ersten Kontinentalkongress führte. Nur 16 Monate später fielen die ersten Schüsse des Krieges.</p>
+            <p>Großbritannien hoffte, Boston zu isolieren. Das Gegenteil trat ein. Die Kolonien solidarisierten sich.</p>
+
+             <figure>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Congress_voting_independence.jpg/1280px-Congress_voting_independence.jpg" alt="Der Erste Kontinentalkongress">
+                <figcaption>Als Reaktion auf die Strafmaßnahmen versammelte sich 1774 der Erste Kontinentalkongress in Philadelphia.</figcaption>
+            </figure>
+
+            <p>Was als Steuerstreit begonnen hatte, war nun ein Kampf um Souveränität. Nur 16 Monate später fielen die ersten Schüsse des Krieges.</p>
         </section>
 
         <section id="conclusion">
