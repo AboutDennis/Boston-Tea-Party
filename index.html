@@ -59,7 +59,6 @@
         /* --- HEADER / HERO SECTION --- */
         header {
             height: 90vh;
-            /* UPDATED: Historische Darstellung von N. Currier, 1846 */
             background: linear-gradient(rgba(26, 37, 47, 0.7), rgba(26, 37, 47, 0.5)), url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Boston_Tea_Party_Currier_colored.jpg/1280px-Boston_Tea_Party_Currier_colored.jpg'); 
             background-size: cover;
             background-position: center;
@@ -165,7 +164,7 @@
             max-width: 100%;
             height: auto;
             border-radius: 4px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* Moderner Schatten */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
         figcaption {
@@ -176,7 +175,6 @@
             font-style: italic;
         }
 
-        /* Stil für rechtsbündiges Bild im Textfluss */
         .img-float-right {
             float: right;
             width: 40%;
@@ -243,20 +241,145 @@
             background-color: #fff5f5;
         }
 
-        /* --- FOOTER --- */
-        footer {
-            background: var(--primary-blue);
+        /* --- TOOLTIP DESIGN (NEU HINZUGEFÜGT) --- */
+        .tooltip {
+            position: relative;
+            cursor: help;
+            border-bottom: 2px dotted var(--accent-red);
+            transition: all 0.3s ease;
+        }
+
+        .tooltip:hover {
+            background-color: rgba(192, 57, 43, 0.1);
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-blue);
             color: #fff;
+            padding: 0.8rem 1rem;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            line-height: 1.4;
             text-align: center;
-            padding: 3rem 1rem;
+            width: max-content;
+            max-width: 250px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 10000;
+            pointer-events: none;
+        }
+
+        .tooltip::before {
+            content: "";
+            position: absolute;
+            bottom: 115%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: var(--primary-blue) transparent transparent transparent;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover::after,
+        .tooltip:hover::before {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(-5px);
+        }
+
+
+/* --- FOOTER DESIGN --- */
+        footer {
+            background-color: var(--primary-blue);
+            color: #ecf0f1; /* Ein weiches Weiß, angenehmer für die Augen */
+            padding: 4rem 1rem 2rem;
             font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
+            border-top: 4px solid var(--gold); /* Goldene Abschlusskante oben */
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center; /* Überschriften zentriert */
+        }
+
+        footer h3 {
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+
+        footer h4 {
+            color: #fff;
+            font-size: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Liste der Quellen sauberer gestalten */
+        .source-list {
+            list-style: none;
+            padding: 0;
+            text-align: left; /* Text linksbündig für bessere Lesbarkeit */
+            margin-bottom: 3rem;
+        }
+
+        .source-list li {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Zarte Trennlinie */
+            line-height: 1.6;
+        }
+
+        .source-list li:last-child {
+            border-bottom: none;
+        }
+
+        .source-list strong {
+            color: #fff;
+            display: block; /* Titel in neuer Zeile */
+            margin-bottom: 0.2rem;
+        }
+
+        footer a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+        }
+
+        /* Copyright Bereich ganz unten */
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            color: #95a5a6;
+            font-size: 0.8rem;
         }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             header h1 { font-size: 2.5rem; }
-            nav { display: none; /* Vereinfachung für Mobile */ }
+            nav { display: none; }
             .container { padding: 2rem 1.5rem; }
             h2 { font-size: 2rem; }
             .img-float-right {
@@ -335,7 +458,7 @@
             <span class="section-number">Kapitel 3</span>
             <h2>Der Auslöser: Der Tea Act von 1773</h2>
             <p>Im Jahr 1773 stand die britische East India Company (EIC) vor dem Bankrott. Um sie zu retten, verabschiedete das Parlament den Tea Act.</p>
-            <p>Ironischerweise machte der Tea Act den Tee für die Kolonisten <em>billiger</em>. Das Gesetz erlaubte der EIC, Zwischenhändler zu umgehen. Doch Lord North unterschätzte die Amerikaner. Die <strong>Sons of Liberty</strong> sahen darin zwei Gefahren:</p>
+            <p>Ironischerweise machte der Tea Act den Tee für die Kolonisten <em>billiger</em>. Das Gesetz erlaubte der EIC, Zwischenhändler zu umgehen. Doch Lord North unterschätzte die Amerikaner. Die <span class="tooltip" data-tooltip="Geheimbund der amerikanischen Patrioten, die gegen die britische Willkürherrschaft kämpften.">Sons of Liberty</span> sahen darin zwei Gefahren:</p>
             <ul>
                 <li>Die Akzeptanz des billigen Tees würde bedeuten, dass man die britische Steuer stillschweigend anerkannte.</li>
                 <li>Das Monopol der East India Company bedrohte die lokalen amerikanischen Kaufleute.</li>
@@ -367,7 +490,7 @@
         <section id="reaction">
             <span class="section-number">Kapitel 5</span>
             <h2>Die Reaktion: Von Zwang zu Krieg</h2>
-            <p>Für König Georg III. war dies offene Rebellion. Das Parlament antwortete mit Härte und verabschiedete die <strong>Coercive Acts</strong> (in Amerika "Intolerable Acts" genannt):</p>
+            <p>Für König Georg III. war dies offene Rebellion. Das Parlament antwortete mit Härte und verabschiedete die <span class="tooltip" data-tooltip="Zwangsgesetze. Eine Reihe von 4 Strafgesetzen, um Boston für die Tea Party zu bestrafen.">Coercive Acts</span> (in Amerika "Intolerable Acts" genannt):</p>
 
             <div class="acts-grid">
                 <div class="act-card intolerable">
@@ -402,26 +525,47 @@
             <span class="section-number">Kapitel 6</span>
             <h2>Fazit und historische Einordnung</h2>
             <p>Die Boston Tea Party ist weit mehr als eine Anekdote. Sie demonstriert die Macht symbolischer Politik. Die Kolonisten opferten wirtschaftliche Vorteile für politische Prinzipien.</p>
-            <p>Es war der "Point of no Return". Heute gilt das Ereignis als Urtypus des zivilen Ungehorsams in den USA und erinnert daran, dass Revolutionen oft nicht durch große Schlachten, sondern durch symbolische Handlungen ausgelöst werden, die das kollektive Bewusstsein verändern.</p>
+            <p>Es war der "Point of no Return". Heute gilt das Ereignis als <span class="tooltip" data-tooltip="Ein ursprüngliches Vorbild, Muster oder Urbild für alles Nachfolgende.">Urtypus</span> des zivilen Ungehorsams in den USA und erinnert daran, dass Revolutionen oft nicht durch große Schlachten, sondern durch symbolische Handlungen ausgelöst werden, die das kollektive Bewusstsein verändern.</p>
         </section>
 
     </div>
 
- <footer>
-        <div class="container">
-            <h3>Quellen und Urheberrechte</h3>
+<footer>
+        <div class="footer-content">
+            <h3>Quellenverzeichnis</h3>
             
-            <p><strong>Text:</strong> Eine Analyse der Boston Tea Party."</p>
+            <p style="margin-bottom: 2rem;">
+                Diese Webseite dient als historisches Bildungsprojekt über die Ereignisse von 1773.
+            </p>
 
-            <p><strong>Bildquellen (Public Domain / Gemeinfrei):</strong></p>
-            <ul>
-                <li>**Titelbild / Header:** Currier & Ives. *The Destruction of Tea at Boston Harbor*. Lithografie, 1846. Quelle: <a href="https://commons.wikimedia.org/wiki/File:Boston_Tea_Party_Currier_colored.jpg" target="_blank">Wikimedia Commons</a>.</li>
-                <li>**König Georg III.:** Allan Ramsay. *King George III in Coronation Robes*. Öl auf Leinwand, 1762. Quelle: <a href="https://commons.wikimedia.org/wiki/File:King_George_III_by_Allan_Ramsay_1762.jpg" target="_blank">Wikimedia Commons</a>.</li>
-                <li>**Boston Tea Party (Stich):** Stich von W.D. Cooper, 1789. Quelle: <a href="https://commons.wikimedia.org/wiki/File:Boston_Tea_Party_w.jpg" target="_blank">Wikimedia Commons</a>.</li>
-                <li>**Kontinentalkongress:** Robert Edge Pine & Edward Savage. *The First Continental Congress, 1774*. Öl auf Leinwand, 1787–1800. Quelle: <a href="https://commons.wikimedia.org/wiki/File:The_First_Continental_Congress,_1774.jpg" target="_blank">Wikimedia Commons</a>.</li>
+            <h4>Bildquellen (Public Domain)</h4>
+            <ul class="source-list">
+                <li>
+                    <strong>Titelbild / Header:</strong> 
+                    Currier & Ives. <em>The Destruction of Tea at Boston Harbor</em>. Lithografie, 1846.<br>
+                    Quelle: <a href="https://commons.wikimedia.org/wiki/File:Boston_Tea_Party_Currier_colored.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>
+                </li>
+                <li>
+                    <strong>Porträt König Georg III.:</strong> 
+                    Allan Ramsay. <em>King George III in Coronation Robes</em>. Öl auf Leinwand, 1762.<br>
+                    Quelle: <a href="https://commons.wikimedia.org/wiki/File:King_George_III_by_Allan_Ramsay_1762.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>
+                </li>
+                <li>
+                    <strong>Stich der Tea Party:</strong> 
+                    W.D. Cooper. <em>The History of North America</em>. Kupferstich, 1789.<br>
+                    Quelle: <a href="https://commons.wikimedia.org/wiki/File:Boston_Tea_Party_w.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>
+                </li>
+                <li>
+                    <strong>Kontinentalkongress:</strong> 
+                    Robert Edge Pine & Edward Savage. <em>The First Continental Congress, 1774</em>. Öl auf Leinwand, ca. 1790.<br>
+                    Quelle: <a href="https://commons.wikimedia.org/wiki/File:The_First_Continental_Congress,_1774.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>
+                </li>
             </ul>
 
-            <p class="copyright">&copy; 2025.</p>
+            <div class="footer-bottom">
+                &copy; 2025 Geschichtsprojekt Boston Tea Party. Alle Rechte vorbehalten.<br>
+                Erstellt mit HTML & CSS.
+            </div>
         </div>
     </footer>
 
