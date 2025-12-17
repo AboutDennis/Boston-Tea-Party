@@ -1,3 +1,3 @@
 # Boston-Tea-Party
  Boston Tea Party 
- Dies ist ein privates Schulprojekt/Bildungsprojekt zu Übungszwecken." Das unterstreicht den nicht-kommerziellen Charakter.
+ Dies ist ein privates Schulprojekt zu Übungszwecken." Das unterstreicht den nicht-kommerziellen Charakter.
